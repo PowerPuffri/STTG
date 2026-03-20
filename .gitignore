@@ -1,0 +1,49 @@
+# Environment and caches
+__pycache__/
+*.py[cod]
+*$py.class
+.env
+.venv
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+
+# Databases
+*.db
+*.sqlite3
+*.sqlite
+users.db
+st_tg_mapping.db
+
+# Media and logs
+*.mp3
+*.wav
+*.ogg
+*.log
+logs/
+
+# Sensitive Config
+config.py
+
+# Ignore large external cloned dirs
+SillyTavern/
+awesome-telegram-mini-apps-main/
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# IDEs
+.vscode/
+.idea/
+.claude/
+.cursorrules
+.trae/
+data/

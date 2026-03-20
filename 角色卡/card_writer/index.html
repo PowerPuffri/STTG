@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>角色卡撰写器 - chara_card_v2</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="app">
+    <header class="hero">
+      <div>
+        <p class="kicker">chara_card_v2 · spec 2.0</p>
+        <h1>角色卡撰写器</h1>
+        <p class="subtitle">一键生成 + 精雕细琢，适配主流角色卡格式</p>
+      </div>
+      <div class="actions">
+        <input id="fileInput" type="file" accept=".json" hidden />
+        <button id="importBtn" class="ghost">导入 JSON</button>
+        <button id="exportBtn">导出 JSON</button>
+        <button id="copyBtn" class="ghost">复制 JSON</button>
+      </div>
+    </header>
+
+    <main class="grid">
+      <section class="panel" id="quickPanel">
+        <div class="panel-header">
+          <h2>一键撰写</h2>
+          <span class="pill">AI/模板双模式</span>
+        </div>
+
+        <div class="field">
+          <label for="platformSelect">目标平台</label>
+          <select id="platformSelect">
+            <option value="chub">CharHub / Chub（chara_card_v2）</option>
+            <option value="sillytavern">SillyTavern（chara_card_v2）</option>
+            <option value="tavern_v1">Legacy Tavern v1（平铺字段）</option>
+          </select>
+          <p class="help" id="platformHint"></p>
+        </div>
+
+        <div class="field">
+          <label for="quickName">角色名</label>
+          <input id="quickName" type="text" placeholder="例如：Haruka" />
+        </div>
+
+        <div class="field">
+          <label for="quickConcept">一句话核心设定</label>
+          <textarea id="quickConcept" rows="3" placeholder="例如：冷面社恐偶像，暗恋用户却只会疯狂暗示。"></textarea>
+        </div>
+
+        <div class="field">
+          <label for="quickRole">身份/年龄/关键词</label>
+          <input id="quickRole" type="text" placeholder="例如：20岁，大学生，排球社王牌" />
+        </div>
+
+        <div class="field">
+          <label for="quickRelation">与 {{user}} 的关系/动机</label>
+          <textarea id="quickRelation" rows="2" placeholder="例如：把 {{user}} 当作唯一目标，想告白但说不出口。"></textarea>
+        </div>
+
+        <div class="field">
+          <label for="quickWorld">世界观/场景基调</label>
+          <input id="quickWorld" type="text" placeholder="例如：现代校园、轻喜剧、日常向" />
+        </div>
+
+        <div class="field">
+          <label for="quickStyle">语言风格/叙事偏好</label>
+          <input id="quickStyle" type="text" placeholder="例如：轻松、带内心独白、感情线慢热" />
+        </div>
+
+        <div class="field">
+          <label for="quickBoundaries">内容边界/尺度</label>
+          <input id="quickBoundaries" type="text" placeholder="例如：SFW 或 NSFW；禁忌点" />
+        </div>
+
+        <div class="field">
+          <label for="quickLang">输出语言</label>
+          <input id="quickLang" type="text" placeholder="例如：中文" />
+        </div>
+
+        <div class="field inline">
+          <label>生成方式</label>
+          <div class="inline-toggle">
+            <button id="modeAi" class="seg active">AI 生成</button>
+            <button id="modeTemplate" class="seg">模板生成</button>
+          </div>
+        </div>
+
+        <div id="aiSettings" class="ai-settings">
+          <div class="field">
+            <label for="apiBase">API Base URL</label>
+            <input id="apiBase" type="text" placeholder="例如：https://api.openai.com 或你的本地代理" />
+          </div>
+          <div class="field">
+            <label for="apiKey">API Key</label>
+            <input id="apiKey" type="password" placeholder="可选：留空则仅使用模板" />
+          </div>
+          <div class="field">
+            <label for="apiModel">模型名称</label>
+            <input id="apiModel" type="text" placeholder="例如：gpt-4.1-mini" />
+          </div>
+          <div class="field">
+            <label for="apiTemp">温度</label>
+            <input id="apiTemp" type="number" min="0" max="1.5" step="0.1" value="0.8" />
+          </div>
+          <p class="help">未配置 API 时会自动回退到模板生成。</p>
+        </div>
+
+        <button id="generateBtn" class="primary">一键撰写</button>
+        <p class="status" id="quickStatus"></p>
+      </section>
+
+      <section class="panel" id="editorPanel">
+        <div class="panel-header">
+          <h2>精雕细琢</h2>
+          <label class="switch">
+            <input id="advancedToggle" type="checkbox" />
+            <span>高级模式</span>
+          </label>
+        </div>
+
+        <div class="split">
+          <div>
+            <div class="field">
+              <label for="name">角色名</label>
+              <input id="name" type="text" />
+            </div>
+            <div class="field">
+              <label for="creator">作者</label>
+              <input id="creator" type="text" />
+            </div>
+            <div class="field">
+              <label for="version">角色版本</label>
+              <input id="version" type="text" placeholder="例如：main" />
+            </div>
+            <div class="field">
+              <label for="avatar">头像 URL</label>
+              <input id="avatar" type="text" />
+            </div>
+            <div class="field">
+              <label for="tags">标签（逗号分隔）</label>
+              <input id="tags" type="text" placeholder="SFW, Romance, Slice of Life" />
+            </div>
+            <div class="field">
+              <label for="altGreetings">替代开场（每行一条）</label>
+              <textarea id="altGreetings" rows="5"></textarea>
+            </div>
+          </div>
+
+          <div>
+            <div class="field">
+              <label for="description">描述（推荐 Markdown）</label>
+              <textarea id="description" rows="10"></textarea>
+            </div>
+            <div class="field">
+              <label for="personality">personality 字段</label>
+              <textarea id="personality" rows="3" placeholder="可留空"></textarea>
+            </div>
+            <div class="field">
+              <label for="scenario">场景/世界观（scenario）</label>
+              <textarea id="scenario" rows="3"></textarea>
+            </div>
+          </div>
+        </div>
+
+        <div class="field">
+          <label for="firstMes">首条消息（first_mes）</label>
+          <textarea id="firstMes" rows="8"></textarea>
+        </div>
+
+        <div class="field">
+          <label for="mesExample">对话示例（mes_example）</label>
+          <textarea id="mesExample" rows="8"></textarea>
+        </div>
+
+        <div class="field">
+          <label for="creatorNotes">创作者备注（creator_notes，可含 HTML）</label>
+          <textarea id="creatorNotes" rows="6"></textarea>
+        </div>
+
+        <div class="field">
+          <label for="systemPrompt">system_prompt</label>
+          <textarea id="systemPrompt" rows="4"></textarea>
+        </div>
+
+        <div class="field">
+          <label for="postHistory">post_history_instructions</label>
+          <textarea id="postHistory" rows="4"></textarea>
+        </div>
+
+        <div id="simpleExtensions" class="simple-extensions">
+          <h3>扩展：Depth Prompt</h3>
+          <div class="field">
+            <label for="depthRole">role</label>
+            <input id="depthRole" type="text" placeholder="system / user / assistant" />
+          </div>
+          <div class="field">
+            <label for="depthValue">depth</label>
+            <input id="depthValue" type="number" min="0" step="1" />
+          </div>
+          <div class="field">
+            <label for="depthPrompt">prompt</label>
+            <textarea id="depthPrompt" rows="4"></textarea>
+          </div>
+        </div>
+
+        <div id="advancedEditors" class="advanced hidden">
+          <div class="field">
+            <label for="extensionsJson">extensions JSON</label>
+            <textarea id="extensionsJson" rows="10" spellcheck="false"></textarea>
+          </div>
+          <div class="field">
+            <label for="characterBookJson">character_book JSON</label>
+            <textarea id="characterBookJson" rows="10" spellcheck="false"></textarea>
+          </div>
+        </div>
+
+        <p class="status" id="editorStatus"></p>
+      </section>
+    </main>
+
+    <section class="panel preview">
+      <div class="panel-header">
+        <h2>JSON 预览</h2>
+        <div class="mini-actions">
+          <button id="refreshPreview" class="ghost">刷新预览</button>
+          <button id="validateBtn" class="ghost">校验字段</button>
+        </div>
+      </div>
+      <pre id="jsonPreview"></pre>
+      <p class="status" id="previewStatus"></p>
+    </section>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>

@@ -1,0 +1,1 @@
+{"name": "TestChar", "description": "This is a normal description. {{VIP_ONLY}}This is a secret description.{{/VIP_ONLY}}", "first_mes": "Hello! {{VIP_ONLY}}Master, {{/VIP_ONLY}}how are you?"}
