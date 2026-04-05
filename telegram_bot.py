@@ -57,8 +57,8 @@ async def check_user_access(update: Update, context: ContextTypes.DEFAULT_TYPE) 
     # Free users check limit
     if daily_count >= config.DAILY_MSG_LIMIT:
         await update.message.reply_text(
-            "🔞 今日免费激情对话额度已用完。\n"
-            "订阅 VIP 解锁无限畅聊 & 解锁高清私房照功能！\n"
+            "🔒 今日免费深度对话额度已用完。\n"
+            "订阅 VIP 解锁无限畅聊 & 解锁高清场景照片功能！\n"
             "/subscribe"
         )
         return False
@@ -85,7 +85,7 @@ async def subscribe_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
     await update.message.reply_text(
         "💎 **VIP 会员权益**\n\n"
         "1. **无限畅聊**：解除每日 30 条消息限制。\n"
-        "2. **私房照解锁**：查看角色发送的高清私密照片。\n"
+        "2. **场景照解锁**：查看角色发送的高清场景照片。\n"
         "3. **优先响应**：更快的生成速度。\n\n"
         "当前状态：免费用户 (每日额度 30 条)\n"
         "请联系管理员升级：@YourAdminHandle"
@@ -148,13 +148,13 @@ async def img_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
         if not os.path.exists(locked_img_path):
              # Just send text if image missing
              await update.message.reply_text(
-                "🔒 **私密照片仅限 VIP 会员查看**\n\n"
+                "🔒 **场景照片仅限 VIP 会员查看**\n\n"
                 "请输入 /subscribe 解锁全部权益。"
             )
         else:
             await update.message.reply_photo(
                 photo=open(locked_img_path, "rb"),
-                caption="🔒 **私密照片仅限 VIP 会员查看**\n\n请输入 /subscribe 解锁全部权益。"
+                caption="🔒 **场景照片仅限 VIP 会员查看**\n\n请输入 /subscribe 解锁全部权益。"
             )
 
 async def admin_reload_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
@@ -521,7 +521,7 @@ async def handle_image_generation(update, context, raw_prompt):
             await status_msg.edit_text("❌ 图片生成失败。")
     else:
         locked_img_path = "locked.png"
-        caption = "🔞 **AI 想要给你发一张私密照**\n但被 VIP 锁拦截了。\n/subscribe 解锁查看。"
+        caption = "🔒 **AI 想要给你发一张场景照**\n但被 VIP 锁拦截了。\n/subscribe 解锁查看。"
         if os.path.exists(locked_img_path):
             await update.message.reply_photo(photo=open(locked_img_path, "rb"), caption=caption)
         else:
@@ -758,7 +758,7 @@ async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE):
             else:
                 # Free User: Intercept
                 locked_img_path = "locked.png"
-                caption = "🔞 **AI 想要给你发一张私密照**\n但被 VIP 锁拦截了。\n/subscribe 解锁查看。"
+                caption = "🔒 **AI 想要给你发一张场景照**\n但被 VIP 锁拦截了。\n/subscribe 解锁查看。"
                 
                 if os.path.exists(locked_img_path):
                     await update.message.reply_photo(photo=open(locked_img_path, "rb"), caption=caption)
