@@ -37,7 +37,7 @@
 - **网络与并发**: `asyncio`, `aiohttp`, WebSocket
 - **机器人框架**: `python-telegram-bot` (v20+)
 - **AI / 模型驱动**: 
-  - 核心大脑：Zhipu AI (GLM-4-Plus)
+  - 核心大脑：Zhipu AI (GLM-4.7)
   - 视觉引擎：GLM-Image
   - 语音基建：Deepgram SDK / OpenAI
 - **数据持久化**: SQLite3
