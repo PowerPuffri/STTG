@@ -7,7 +7,7 @@
 <p align="center">
   <img alt="Python" src="https://img.shields.io/badge/Python-3.10+-blue.svg" />
   <img alt="Telegram" src="https://img.shields.io/badge/Telegram-Bot%20API-0088cc.svg" />
-  <img alt="LLM" src="https://img.shields.io/badge/LLM-Zhipu%20GLM--4-orange.svg" />
+  <img alt="LLM" src="https://img.shields.io/badge/LLM-Zhipu%20GLM--4.7-orange.svg" />
   <img alt="ASR" src="https://img.shields.io/badge/ASR-Deepgram-purple.svg" />
   <img alt="License" src="https://img.shields.io/badge/License-MIT-green.svg" />
 </p>
