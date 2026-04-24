@@ -23,7 +23,8 @@ pip3 install requests websockets aiohttp
 
 # 启动服务
 echo "启动服务..."
-pm2 start ecosystem.config.js
+cd ..
+pm2 start deploy/ecosystem.config.js
 
 # 保存当前进程列表，以便开机自启（可选）
 # pm2 save

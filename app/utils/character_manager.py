@@ -6,6 +6,8 @@ import logging
 import base64
 import struct
 from pathlib import Path
+from app.utils.png_char_parser import extract_chara_data_from_png
+
 
 # Configure logging
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(name)s - %(levelname)s - %(message)s')

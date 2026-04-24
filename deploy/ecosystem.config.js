@@ -27,7 +27,7 @@ module.exports = {
       name: "Telegram-Adapter",
       script: "telegram_adapter.py",
       interpreter: "python3",
-      cwd: ".",
+      cwd: "../",
       // 使用环境变量获取 Token，避免硬编码
       // 请在启动前设置 ST_BOT_TOKEN 环境变量，或者在 secrets.json 中配置
       args: "--token " + (process.env.ST_BOT_TOKEN || "YOUR_BOT_TOKEN_HERE") + " --admin_pass " + (process.env.ST_ADMIN_PASS || "123456"),

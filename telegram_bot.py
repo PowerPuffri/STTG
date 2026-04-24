@@ -6,12 +6,13 @@ import re
 from telegram import Update, InlineKeyboardButton, InlineKeyboardMarkup
 from telegram.ext import Application, CommandHandler, MessageHandler, CallbackQueryHandler, filters, ContextTypes
 
-from character_manager import CharacterParser
-from st_client import STClient
-from image_client import ImageClient
-from tts_client import TTSClient
-from asr_client import ASRClient
-from database import Database
+from app.utils.character_manager import CharacterParser
+from app.clients.st_client import STClient
+from app.clients.image_client import ImageClient
+from app.clients.tts_client import TTSClient
+from app.clients.asr_client import ASRClient
+from app.core.database import Database
+from app.core.telegram_adapter import TelegramAdapter
 import config
 
 # Configure logging
