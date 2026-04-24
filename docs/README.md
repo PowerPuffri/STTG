@@ -8,7 +8,7 @@
 **内容摘要**：
 - 系统的整体微服务架构图（基于 Mermaid）。
 - Telegram 与底层大模型及多模态引擎的数据流向。
-- 重点攻克的技术难点：包括异步网络环境下的 WebSocket 桥接（ChatBridge）、长连接的 SSL 断流处理、以及多租户（Multi-tenant）环境下的物理隔离与动态 CSRF 安全机制。
+- 重点攻克的技术难点：包括异步网络环境下的 WebSocket 桥接（基于开源 `ChatBridge` 扩展的深度改造）、长连接的 SSL 断流处理、以及多租户（Multi-tenant）环境下的物理隔离与动态 CSRF 安全机制。
 - 核心状态机（State Machine）的设计逻辑。
 
 ### 2. [语音交互与情绪识别架构设计 (Voice Interaction & Emotion Recognition Design)](./voice_interaction_design.md)

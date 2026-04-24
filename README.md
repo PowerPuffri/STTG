@@ -16,9 +16,9 @@
 
 ## 📖 项目简介
 
-**Nuomi Circuit** 是一款基于 Telegram 的高性能多模态 AI 对话系统工程实践。该项目深度整合了大语言模型（LLM）、流式语音识别（ASR）、高保真语音合成（TTS）以及上下文驱动的图像生成技术，展示了从 0 到 1 跑通复杂 AI 系统的架构设计能力。
+**Nuomi Circuit** 是一款基于 Telegram 的高性能多模态 AI 对话系统。本项目深度整合了大语言模型（LLM）、流式语音识别（ASR）、高保真语音合成（TTS）以及上下文驱动的图像生成技术，为用户提供一个稳定、极速且多模态交互的 AI 聊天环境。
 
-本项目为开源社区 SillyTavern 用户提供了一种多模态模型接入扩展方案，通过自研的 `ChatBridge` 实现了异步状态下的微秒级消息投递，并成功突破了 Telegram API 在网络与流式通讯上的并发限制。
+在架构层面，本项目通过引入并深度定制开源社区的 `ChatBridge` 扩展（SillyTavern-Extension-ChatBridge），打通了 Telegram 与底层 AI 聊天引擎（SillyTavern）之间的异步通信链路。它不仅解决了复杂的网络并发问题，还通过自定义的中间件实现了完善的多租户（Multi-tenant）物理隔离。
 
 ## ✨ 核心特性与技术挑战
 

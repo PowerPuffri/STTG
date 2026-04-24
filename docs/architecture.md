@@ -45,7 +45,7 @@ graph TD
 ### 2. 同步 API 与异步 WebSocket 的协议桥接 (ChatBridge)
 **挑战**：底层 AI 聊天引擎（SillyTavern）的原生 API 未针对第三方高并发调用进行优化，且生成回复时使用 WebSocket 进行流式推送，而 Telegram 机器人端期望获得类似于 OpenAI API 的标准同步/异步 HTTP 响应格式。
 **解决方案**：
-- 开发了 `ChatBridge_APIHijackForwarder.py`，实现了一个 **WebSocket 到 HTTP 的桥接代理**。
+- 在开源项目 `ChatBridge_APIHijackForwarder.py` 的基础上进行深度改造，实现了一个 **WebSocket 到 HTTP 的桥接代理**。
 - 利用 Python `asyncio.Future` 和 `asyncio.wait_for` 拦截 WebSocket 流式事件。
 - 在 Node.js 扩展端 (`index.js`) 监听底层的 `MESSAGE_RECEIVED` 和 `GENERATION_ENDED` 事件，主动将最终结果或流式 Chunk 推送至桥接代理。
 - 最终将结果重组封装为标准的 OpenAI API JSON 格式 (`{"choices": [{"message": {"content": "..."}}]}`) 供上层调用。
